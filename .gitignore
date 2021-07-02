@@ -1,0 +1,5 @@
+*.nupkg
+*.old*
+*.txt
+Drafts/
+Drafts/**

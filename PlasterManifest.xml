@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+  schemaVersion="1.1"
+  templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>NewPowerShellModule</name>
+    <id>084e2c16-996f-445e-b63e-de73e21231bc</id>
+    <version>1.0.3</version>
+    <title>PlasterManifest</title>
+    <description>Scaffolds the files required for a PowerShell script module.</description>
+    <author>Tony Pagliaro</author>
+    <tags>PowerShell, Module, ModuleManifest, Automation, DevOps</tags>
+  </metadata>
+  <!-- 
+  Issues to fix and Items to port from New-PsModule:
+  - Check for existing files and archive them before they get clobbered
+  - The required modules do not populate inside the PSD1 file. 
+
+  help:
+  https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md
+  -->
+  <parameters>
+    <parameter  name='Name' 
+                type='text' 
+                prompt='Name of the module' />
+
+    <parameter  name='Description' 
+                type='text' 
+                prompt='Brief description of module (required for publishing)' />
+
+    <parameter  name='Version' 
+                type='text' 
+                default='0.1.0.1'
+                prompt='Enter the version number of the module' />
+    
+    <parameter  name='Author' 
+                type='user-fullname' 
+                prompt="Module author's name" 
+                store='text' />
+
+    <parameter  name='Email'
+                type='user-email'
+                prompt='Enter your email'
+                store='text' />
+
+    <parameter  name='CompanyName' 
+                type='text' 
+                prompt='Name of your Company' 
+                store='text' />
+
+    <parameter  name='PowerShellVersion' 
+                default='5.1' 
+                type='text' 
+                prompt='Minimum PowerShell version' />
+
+    <parameter name='License'
+              type='choice'
+              default='0'
+              store='text'
+              prompt='Select a license for your module'>
+      <choice label='&amp;MIT'
+              help='Adds an MIT license file.'
+              value="MIT"/>
+      <choice label='&amp;None'
+              help='No license specified.'
+              value='None'/>
+    </parameter>
+
+    <parameter  name='SoftwareDependancy' 
+                default='This module has no dependancies other than a supported Windows OS.' 
+                type='text' 
+                prompt='Describe any required Software Dependancies' />  
+
+    <parameter  name='ModuleDependancy' 
+                type='multichoice' 
+                default='2'
+                prompt='`n`nChoose any PowerShell Module Dependancies, one per line.`n`n'>
+ 
+      <choice label='Ps&amp;DateTools'
+              help="Tools for manipulation of date objects in PowerShell."
+              value="PsDateTools"/>
+      <choice label='Ps&amp;WinAdmin'
+              help="Utilities for Windows Administrators."
+              value="PsWinAdmin"/>
+      <choice label='&amp;None'
+              help="No options specified."
+              value="None"/>
+    </parameter>
+
+<!-- Add more options like this... 
+and remember to update the default='#' index to point to the last item (below this comment)
+
+  <choice label='Ps&amp;WinAdmin'
+          help="Utilities for Windows Administrators."
+          value="PsWinAdmin"/>
+
+-->
+
+  </parameters>
+  <content>
+
+<!-- We will always want pester tests on all our modules -->
+    <requireModule  name="Pester" 
+                    minimumVersion="5.2.2"
+                    message=
+"Without Pester, you will not be able to run the provided Pester test to validate your module manifest file.`nWithout version 3.4.0, VS Code will not display Pester warnings and errors in the Problems panel."/>
+
+<!-- We will sometimes want Sake on our module -->
+    <requireModule  name="PSake" 
+                    minimumVersion="4.9.0"
+                    condition="${PLASTER_PARAM_ModuleDependancy} -contains 'PSake'"
+                    message=
+"Without PSake, you will not be able to build your module with the best PowerShell CI/CD workflow around."/>
+
+<!-- We will sometimes want PsDateTools on our module -->
+    <requireModule  name="PsDateTools" 
+                    condition="${PLASTER_PARAM_ModuleDependancy} -contains 'PsDateTools'"
+                    message=
+"Without PsDateTools, it may take longer to work with dates in PowerShell."/>
+
+<!-- We will sometimes want PsWinAdmin on our module -->
+    <requireModule  name="PsWinAdmin" 
+                    condition="${PLASTER_PARAM_ModuleDependancy} -contains 'PsWinAdmin'"
+                    message=
+"Without PsWinAdmin, it may take longer to do some Windows admin tasks."/>
+
+<!-- We will sometimes want ________ on our module - ->
+    <requireModule  name="_____" 
+                    condition="${PLASTER_PARAM_ModuleDependancy} -contains '______'"
+                    message=
+"Without _______, you will not be able to ___."/>
+<!- - We will sometimes want ________ on our module -->
+
+
+    <message>
+      Creating folder structure
+      </message>
+        <file source='' 
+              destination='${PLASTER_PARAM_Name}'/>
+        
+        <file source='' 
+              destination='${PLASTER_PARAM_Name}\Tests'/>
+
+        <file source='' 
+              destination='${PLASTER_PARAM_Name}\Private'/>
+
+        <file source='' 
+              destination='${PLASTER_PARAM_Name}\Public'/>              
+
+      <message>
+        Deploying common files
+      </message>
+        <file source='template\ModuleName.psm1' 
+              destination='${PLASTER_PARAM_Name}\${PLASTER_PARAM_Name}.psm1'/>
+        
+        <file source='template\_gitignore' 
+              destination='${PLASTER_PARAM_Name}\.gitignore'/>
+        
+        <file source='template\_gitattributes' 
+              destination='${PLASTER_PARAM_Name}\.gitattributes'/>
+        
+        <file source='template\Private.Tests.ps1' 
+              destination='${PLASTER_PARAM_Name}\Tests\Private.Tests.ps1'/>
+
+      <message>
+        Creating Test files
+      </message>
+
+        <templateFile source='template\Help.Tests.ps1' 
+                      destination='${PLASTER_PARAM_Name}\Tests\Help.Tests.ps1'/>
+
+        <templateFile source='template\Manifest.Tests.ps1' 
+                      destination='${PLASTER_PARAM_Name}\Tests\Manifest.Tests.ps1'/>
+
+        <templateFile source='template\Meta.Tests.ps1' 
+                      destination='${PLASTER_PARAM_Name}\Tests\Meta.Tests.ps1'/>
+
+        <templateFile source='template\MetaFixers.psm1' 
+                      destination='${PLASTER_PARAM_Name}\Tests\MetaFixers.psm1'/>
+
+        <templateFile source='template\ModuleName.Tests.ps1' 
+                      destination='${PLASTER_PARAM_Name}\Tests\${PLASTER_PARAM_Name}.Tests.ps1'/>
+
+      <message>
+        Creating Readme
+      </message>
+        <templateFile source='template\README.md' 
+                      destination='${PLASTER_PARAM_Name}\README.md'/>
+
+      <message>
+        Creating Module Manifest
+      </message>
+      <newModuleManifest  
+        destination='${PLASTER_PARAM_Name}\${PLASTER_PARAM_Name}.psd1'
+        moduleVersion='$PLASTER_PARAM_Version'
+        rootModule='${PLASTER_PARAM_Name}.psm1'
+        author='${PLASTER_PARAM_Author}'
+        companyName='$PLASTER_PARAM_CompanyName'
+        description='$PLASTER_PARAM_Description'
+        powerShellVersion='$PLASTER_PARAM_PowerShellVersion'
+        encoding='UTF8-NoBOM'/>
+
+      <modify path='${PLASTER_PARAM_Name}\${PLASTER_PARAM_Name}.psd1' 
+              condition="$PLASTER_PARAM_ModuleDependancy -ne 'None'"
+              encoding='UTF8'>
+        <replace>
+            <original>(?s)\#\s+?RequiredModules\s\=\s\@\(\)</original>
+            <substitute expand='true'>RequiredModules=@(${PLASTER_PARAM_ModuleDependancy})</substitute>
+        </replace>
+      </modify>
+  </content>
+</plasterManifest>
