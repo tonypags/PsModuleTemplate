@@ -54,17 +54,14 @@ $newModuleName = (Compare-Object ($beforePaths.Name) ($afterPaths.Name)).InputOb
 # END into the created PSD1 file and replace the spaces 
 #  between the required module names with commas
 
-# Initialize the git repo and link origin
-Write-Host "If you'd like to sync up to git, the remote repo must already exist!" -f White
-$uri = (Read-Host "Enter URI to git report to clone").Trim()
-$branch = (Read-Host "What is the name of the default branch (main)").Trim()
-if ($branch) {} else {$branch = 'main'}
+# Initialize the git repo and link origin using templated script
+Set-Location $thismodulePath
+$uri = Get-Item git.bat -ea 0
 if ($uri) {
-    Set-Location $thismodulePath
-    git init -b $branch
-    git remote add origin $uri
-    git fetch
-    git add .
-    git commit -m "Initial commit (scaffold)"
-    git push origin --all
+    & ./git.ps1
 }
+Remove-Item git.bat -confirm:$false -ea 0 -Force
+
+# Show the user all the stuff created
+Start-Sleep -Seconds 1
+Get-ChildItem $thismodulePath
