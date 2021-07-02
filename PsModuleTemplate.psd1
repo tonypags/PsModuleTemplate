@@ -52,8 +52,18 @@ PowerShellVersion = '5.1'
 
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(
-	'Plaster',
-	'Pester'
+    @{
+        ModuleName = "PSake";
+        ModuleVersion = "4.9.0"
+    },
+    @{
+        ModuleName = "Plaster";
+        ModuleVersion = "1.1.3"
+    },
+    @{
+        ModuleName = "Pester";
+        ModuleVersion = "5.2.2"
+    }
 )
 
 # Assemblies that must be loaded prior to importing this module

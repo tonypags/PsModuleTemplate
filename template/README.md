@@ -2,7 +2,7 @@
 
 <%=$PLASTER_PARAM_Description%>
 
-...
+***
 
 # Getting Started
 1.	Installation process 
@@ -17,8 +17,9 @@
     Without Repository available, clone directly from Git:
 
         ```
+        <# new logic is better, below.
         $CloneType = 'https' # HTTPS or SSH
-        $ModuleName = 'ModuleName'
+        $ModuleName = '<%=$PLASTER_PARAM_ModuleName%>'
         $ProjectName = 'ProjectName' # VSTS only, use $null if github
         $OrgName = 'OrgName'
 
@@ -35,6 +36,10 @@
                 "git@github.com:$($OrgName)/$(ModuleName).git"
             }
         }
+        #>
+
+
+        $uri = '<%=$PLASTER_PARAM_GitRepoUri%>'.Trim()
         $ModuleParent = $env:PSModulePath -split ';' | Where {$_ -like "*$($env:USERNAME)*"} | Select -First 1
         Set-Location $ModuleParent
         git clone $uri
