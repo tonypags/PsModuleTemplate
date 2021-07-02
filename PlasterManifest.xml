@@ -96,21 +96,37 @@ and remember to update the default='#' index to point to the last item (below th
 
 -->
 
+    <parameter  name='GitRepoType' 
+                default='0' 
+                type='choice' 
+                prompt='The type of git service are you using (the empty repo should already exist)'>
+
+      <choice label='&amp;VSTS'
+              help="Azure DevOps (dev.azure.com)."
+              value="VSTS"/>
+      <choice label='&amp;GitHub'
+              help="GitHub (github.com)."
+              value="GitHub"/>
+      <choice label='&amp;None'
+              help="Do not sync with a repo."
+              value="None"/>              
+    </parameter>
+<!--
+  Note that the feature for conditional parameters is not yet released:
+  https://github.com/PowerShellOrg/Plaster/pull/265
+-->
+      <parameter  name='DefaultGitBranchName' 
+                default='main' 
+                type='text' 
+                prompt='The default/production branch name for this git repo' />  
+
+      <parameter  name='GitRepoUri' 
+                default='' 
+                type='text' 
+                prompt='The URL to set as git remote origin' />  
+
   </parameters>
   <content>
-
-<!-- We will always want pester tests on all our modules -->
-    <requireModule  name="Pester" 
-                    minimumVersion="5.2.2"
-                    message=
-"Without Pester, you will not be able to run the provided Pester test to validate your module manifest file.`nWithout version 3.4.0, VS Code will not display Pester warnings and errors in the Problems panel."/>
-
-<!-- We will sometimes want Sake on our module -->
-    <requireModule  name="PSake" 
-                    minimumVersion="4.9.0"
-                    condition="${PLASTER_PARAM_ModuleDependancy} -contains 'PSake'"
-                    message=
-"Without PSake, you will not be able to build your module with the best PowerShell CI/CD workflow around."/>
 
 <!-- We will sometimes want PsDateTools on our module -->
     <requireModule  name="PsDateTools" 
@@ -180,6 +196,14 @@ and remember to update the default='#' index to point to the last item (below th
 
         <templateFile source='template\ModuleName.Tests.ps1' 
                       destination='${PLASTER_PARAM_Name}\Tests\${PLASTER_PARAM_Name}.Tests.ps1'/>
+
+      <message>
+        Creating git.ps1 file
+      </message>
+
+        <templateFile source='template\git.ps1' 
+                      destination='${PLASTER_PARAM_Name}\git.ps1'
+                      condition='$PLASTER_PARAM_GitRepoType -ne "None"'/>
 
       <message>
         Creating Readme
