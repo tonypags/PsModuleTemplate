@@ -57,7 +57,7 @@
 
     Update the version number and copyright date if required.
 
-	Update the Exported Function Name array with the basenames of the files under the .\ folder only.
+	Update the Exported Function Name array with the basenames of the files under the Public folder only.
 
 5.  Create a new, blank PSM1 file in here. 
 
