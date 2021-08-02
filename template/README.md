@@ -1,4 +1,4 @@
-# <%=$PLASTER_PARAM_ModuleName%>
+# <%=$PLASTER_PARAM_Name%>
 
 <%=$PLASTER_PARAM_Description%>
 
@@ -11,7 +11,7 @@
 
         ```
         $repo = 'PsGallery' # Private internal repo is preferred
-        Install-Module -Name <%=$PLASTER_PARAM_ModuleName%> -Repository $repo
+        Install-Module -Name <%=$PLASTER_PARAM_Name%> -Repository $repo
         ```
 
     Without Repository available, clone directly from Git:
