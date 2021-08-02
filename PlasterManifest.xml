@@ -51,7 +51,7 @@
     <parameter  name='PowerShellVersion' 
                 default='5.1' 
                 type='text' 
-                prompt='Minimum PowerShell version' />
+                prompt='Minimum PowerShell version (with decimal)' />
 
     <parameter name='License'
               type='choice'
