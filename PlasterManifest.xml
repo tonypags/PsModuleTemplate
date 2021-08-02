@@ -73,7 +73,7 @@
 
     <parameter  name='ModuleDependancy' 
                 type='multichoice' 
-                default='2'
+                default='3'
                 prompt='`n`nChoose any PowerShell Module Dependancies, one per line.`n`n'>
  
       <choice label='Ps&amp;DateTools'
@@ -82,13 +82,16 @@
       <choice label='Ps&amp;WinAdmin'
               help="Utilities for Windows Administrators."
               value="PsWinAdmin"/>
+      <choice label='S&amp;qlServer'
+              help="Cmdlets for MSSQL."
+              value="SqlServer"/>
       <choice label='&amp;None'
               help="No options specified."
               value="None"/>
     </parameter>
 
 <!-- Add more options like this... 
-and remember to update the default='#' index to point to the last item (below this comment)
+and remember to update the default='#' index to point to the last item
 
   <choice label='Ps&amp;WinAdmin'
           help="Utilities for Windows Administrators."
