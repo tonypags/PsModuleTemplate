@@ -56,11 +56,11 @@ $newModuleName = (Compare-Object ($beforePaths.Name) ($afterPaths.Name)).InputOb
 
 # Initialize the git repo and link origin using templated script
 Set-Location $thismodulePath
-$uri = Get-Item git.bat -ea 0
-if ($uri) {
+$ps1 = Get-Item git.ps1 -ea 0
+if ($ps1) {
     & ./git.ps1
 }
-Remove-Item git.bat -confirm:$false -ea 0 -Force
+Remove-Item git.ps1 -confirm:$false -ea 0 -Force
 
 # Show the user all the stuff created
 Start-Sleep -Seconds 1
