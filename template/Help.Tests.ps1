@@ -1,4 +1,5 @@
-$ModuleParent = Split-Path -Path ((Get-PSCallStack)[0].ScriptName) -Parent
+$TestsFolder = Split-Path -Path ((Get-PSCallStack)[0].ScriptName) -Parent
+$ModuleParent = Split-Path -Path $TestsFolder -Parent
 $ModuleName = Split-Path -Path $ModuleParent -Leaf
 
 # Remove all versions of the module from the session. Pester can't handle multiple versions.
@@ -22,22 +23,22 @@ foreach ($command in $commands) {
 
         # If help is not found, synopsis in auto-generated help is the syntax diagram
         It 'should not be auto-generated' {
-            $help.Synopsis | Should Not BeLike '*`[`<CommonParameters`>`]*'
+            $help.Synopsis | Should -Not -BeLike '*`[`<CommonParameters`>`]*'
         }
 
         # Should be a description for every function
         It "gets description for $commandName" {
-            $help.Description | Should Not BeNullOrEmpty
+            $help.Description | Should -Not -BeNullOrEmpty
         }
 
         # Should be at least one example
         It "gets example code from $commandName" {
-            ($help.Examples.Example | Select-Object -First 1).Code | Should Not BeNullOrEmpty
+            ($help.Examples.Example | Select-Object -First 1).Code | Should -Not -BeNullOrEmpty
         }
 
         # Should be at least one example description
         It "gets example help from $commandName" {
-            ($help.Examples.Example.Remarks | Select-Object -First 1).Text | Should Not BeNullOrEmpty
+            ($help.Examples.Example.Remarks | Select-Object -First 1).Text | Should -Not -BeNullOrEmpty
         }
 
         Context "Test parameter help for $commandName" {
@@ -62,13 +63,13 @@ foreach ($command in $commands) {
 
                 # Should be a description for every parameter
                 It "gets help for parameter: $parameterName : in $commandName" {
-                    $parameterHelp.Description.Text | Should Not BeNullOrEmpty
+                    $parameterHelp.Description.Text | Should -Not -BeNullOrEmpty
                 }
 
                 # Required value in Help should match IsMandatory property of parameter
                 It "help for $parameterName parameter in $commandName has correct Mandatory value" {
                     $codeMandatory = $parameter.IsMandatory.toString()
-                    $parameterHelp.Required | Should Be $codeMandatory
+                    $parameterHelp.Required | Should -Be $codeMandatory
                 }
 
                 # Parameter type in Help should match code
@@ -76,14 +77,14 @@ foreach ($command in $commands) {
                 #     $codeType = $parameter.ParameterType.Name
                 #     # To avoid calling Trim method on a null object.
                 #     $helpType = if ($parameterHelp.parameterValue) { $parameterHelp.parameterValue.Trim() }
-                #     $helpType | Should be $codeType
+                #     $helpType | Should -Be $codeType
                 # }
             }
 
             foreach ($helpParm in $HelpParameterNames) {
                 # Shouldn't find extra parameters in help.
                 It "finds help parameter in code: $helpParm" {
-                    $helpParm -in $parameterNames | Should Be $true
+                    $helpParm -in $parameterNames | Should -Be $true
                 }
             }
         }
@@ -96,7 +97,7 @@ foreach ($command in $commands) {
                     # Should have a valid uri if one is provided.
                     it "[$link] should have 200 Status Code for $commandName" {
                         $Results = Invoke-WebRequest -Uri $link -UseBasicParsing
-                        $Results.StatusCode | Should Be '200'
+                        $Results.StatusCode | Should -Be '200'
                     }
                 }
             }
