@@ -1,6 +1,6 @@
 Describe '<%=$PLASTER_PARAM_Name%> Tests' {
 
-    Import-Module "<%=$PLASTER_PARAM_Name%>" -ea 0
+    Import-Module "<%=$PLASTER_PARAM_Name%>" -ea 0 -Force
 
     Context 'Test Module import' {
 
