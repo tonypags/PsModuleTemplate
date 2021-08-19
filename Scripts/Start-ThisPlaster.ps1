@@ -64,4 +64,5 @@ Remove-Item git.ps1 -confirm:$false -ea 0 -Force
 
 # Show the user all the stuff created
 Start-Sleep -Seconds 1
+cd ..
 Get-ChildItem $thismodulePath
