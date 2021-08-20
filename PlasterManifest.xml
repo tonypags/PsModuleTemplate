@@ -177,28 +177,31 @@ and remember to update the default='#' index to point to the last item
         
         <file source='template\_gitattributes' 
               destination='${PLASTER_PARAM_Name}\.gitattributes'/>
-        
-        <file source='template\Private.Tests.ps1' 
-              destination='${PLASTER_PARAM_Name}\Tests\Private.Tests.ps1'/>
+
+        <file source='template\placeholder.ps1' 
+              destination='${PLASTER_PARAM_Name}\Private\placeholder.ps1'/>
 
       <message>
         Creating Test files
       </message>
 
-        <templateFile source='template\Help.Tests.ps1' 
-                      destination='${PLASTER_PARAM_Name}\Tests\Help.Tests.ps1'/>
+        <!-- <templateFile source='template\Help.Tests.ps1' 
+              destination='${PLASTER_PARAM_Name}\Tests\Help.Tests.ps1'/> -->
 
         <templateFile source='template\Manifest.Tests.ps1' 
-                      destination='${PLASTER_PARAM_Name}\Tests\Manifest.Tests.ps1'/>
+              destination='${PLASTER_PARAM_Name}\Tests\Manifest.Tests.ps1'/>
 
         <templateFile source='template\Meta.Tests.ps1' 
-                      destination='${PLASTER_PARAM_Name}\Tests\Meta.Tests.ps1'/>
+              destination='${PLASTER_PARAM_Name}\Tests\Meta.Tests.ps1'/>
 
         <templateFile source='template\MetaFixers.psm1' 
-                      destination='${PLASTER_PARAM_Name}\Tests\MetaFixers.psm1'/>
+              destination='${PLASTER_PARAM_Name}\Tests\MetaFixers.psm1'/>
 
         <templateFile source='template\ModuleName.Tests.ps1' 
-                      destination='${PLASTER_PARAM_Name}\Tests\${PLASTER_PARAM_Name}.Tests.ps1'/>
+              destination='${PLASTER_PARAM_Name}\Tests\${PLASTER_PARAM_Name}.Tests.ps1'/>
+
+        <file source='template\Private.Tests.ps1' 
+              destination='${PLASTER_PARAM_Name}\Tests\Private.Tests.ps1'/>
 
       <message>
         Creating git.ps1 file
