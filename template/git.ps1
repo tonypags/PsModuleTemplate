@@ -1,14 +1,14 @@
 
 # <%=$PLASTER_PARAM_GitRepoUri%>
 
-Set-Location $env:USERPROFILE
-Set-Location Documents
-Set-Location WindowsPowerShell
-Set-Location Modules
-Set-Location "<%=$PLASTER_PARAM_Name%>"
+# Tell Plaster where the modules are located
+$ModulesPath = Get-ModulesPath
+Set-Location $ModulesPath
 
-git init -b <%=$PLASTER_PARAM_DefaultGitBranchName%>
-git remote add origin <%=$PLASTER_PARAM_GitRepoUri%>
+$brName = '<%=$PLASTER_PARAM_DefaultGitBranchName%>'
+$repoUri = '<%=$PLASTER_PARAM_GitRepoUri%>'
+git init $brName
+git remote add origin $repoUri
 git fetch
 git add .
 git commit -m "Initial commit (scaffold)"

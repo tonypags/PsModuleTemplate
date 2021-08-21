@@ -5,7 +5,8 @@
 $XmlParent = Split-Path $PSScriptRoot -Parent
 
 # Tell Plaster where the modules are located
-$ModulesPath = Join-Path (Split-Path $profile -Parent) "Modules"
+$ModulesPath = Get-ModulesPath
+
 
 # Record the current list of folders in the module path
 $beforePaths = Get-ChildItem $ModulesPath -Directory
