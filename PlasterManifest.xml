@@ -188,8 +188,8 @@ and remember to update the default='#' index to point to the last item
         <!-- <templateFile source='template\Help.Tests.ps1' 
               destination='${PLASTER_PARAM_Name}\Tests\Help.Tests.ps1'/> -->
 
-        <templateFile source='template\Manifest.Tests.ps1' 
-              destination='${PLASTER_PARAM_Name}\Tests\Manifest.Tests.ps1'/>
+        <!-- <templateFile source='template\Manifest.Tests.ps1' 
+              destination='${PLASTER_PARAM_Name}\Tests\Manifest.Tests.ps1'/> -->
 
         <templateFile source='template\Meta.Tests.ps1' 
               destination='${PLASTER_PARAM_Name}\Tests\Meta.Tests.ps1'/>
