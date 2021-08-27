@@ -60,8 +60,8 @@ Set-Location $thismodulePath
 $ps1 = Get-Item git.ps1 -ea 0
 if ($ps1) {
     & ./git.ps1
+    # the file will be deleted prio to commit
 }
-Remove-Item git.ps1 -confirm:$false -ea 0 -Force
 
 # Show the user all the stuff created
 Start-Sleep -Seconds 1
