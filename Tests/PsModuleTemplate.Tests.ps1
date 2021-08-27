@@ -13,9 +13,9 @@
 
     Context 'Test PsModuleTemplate Functions' {
 
-        It 'Valid Value (sample test)' {
-            $Valid = 'Valid'
-            $Valid | Should -Be $Valid
+        It 'Gets the modules root path' {
+            $mod = Get-ModulesPath
+            Test-Path $mod | Should -Be $true
         }
 
     }
