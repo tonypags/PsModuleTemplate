@@ -181,6 +181,9 @@ and remember to update the default='#' index to point to the last item
         <file source='template\placeholder.ps1' 
               destination='${PLASTER_PARAM_Name}\Private\placeholder.ps1'/>
 
+        <file source='template\new-placeholder.ps1' 
+              destination='${PLASTER_PARAM_Name}\Public\newplaceholder.ps1'/>
+
       <message>
         Creating Test files
       </message>
