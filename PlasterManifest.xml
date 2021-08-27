@@ -126,7 +126,7 @@ and remember to update the default='#' index to point to the last item
       <parameter  name='GitRepoUri' 
                 default='' 
                 type='text' 
-                prompt='The URL to set as git remote origin' />  
+                prompt='The URL to set as git remote origin (space to skip)' />
 
   </parameters>
   <content>
