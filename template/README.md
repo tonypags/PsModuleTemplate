@@ -6,22 +6,19 @@
 
 # Getting Started
 1.	Installation process 
-
+<!--
     Access to the repository required:
 
-        ```
         $repo = 'PsGallery' # Private internal repo is preferred
         Install-Module -Name <%=$PLASTER_PARAM_Name%> -Repository $repo
-        ```
+-->
 
     Without Repository available, clone directly from Git:
 
-        ```
         $uri = '<%=$PLASTER_PARAM_GitRepoUri%>'.Trim()
         $ModuleParent = $env:PSModulePath -split ';' | Where {$_ -like "*$($env:USERNAME)*"} | Select -First 1
         Set-Location $ModuleParent
         git clone $uri
-        ```
 
 <br>
 
