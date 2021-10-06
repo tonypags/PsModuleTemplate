@@ -7,7 +7,6 @@ Scaffolding for PowerShell Modules.
 
     Without Repository available, clone directly from Git:
 
-        ```
         $CloneType = 'https' # HTTPS or SSH
         $ModuleName = 'PsModuleTemplate'
         $ProjectName = '' # VSTS only, use $null if github
@@ -29,14 +28,12 @@ Scaffolding for PowerShell Modules.
         $ModuleParent = $env:PSModulePath -split ';' | Where {$_ -like "*$($env:USERNAME)*"} | Select -First 1
         Set-Location $ModuleParent
         git clone $uri
-        ```
+        
     
 2.	Build a new Module:
         
-        ```
         cd PsModuleTemplate
         & .\Scripts\Start-ThisPlaster.ps1
-        ```
         
 <br>
 
