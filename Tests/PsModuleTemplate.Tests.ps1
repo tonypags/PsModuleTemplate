@@ -30,6 +30,19 @@
             $script:thisName = 'Get-ModulesPath'
         }
 
+        It 'Makes a new adv function' {
+            $Name = 'Get-Something'
+            Mock 'Out-File'
+            Mock 'Get-Item'
+            $null = New-AdvancedFunction -Name $Name
+            # Assert-MockCalled 'Out-File' -Times 1 -Exactly
+            # Assert-MockCalled 'Get-Item' -Times 1 -Exactly
+            Should -Invoke -CommandName Out-File -Times 1 
+            Should -Invoke -CommandName Get-Item -Times 1 
+
+            $script:thisName = 'New-AdvancedFunction'
+        }
+
     }
 
     Context 'Clean up' {
