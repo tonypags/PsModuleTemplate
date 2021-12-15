@@ -63,10 +63,11 @@ function {0} {{
             Mandatory=$true, 
             ValueFromPipeline=$true,
             ValueFromPipelineByPropertyName=$true, 
-            ValueFromRemainingArguments=$false, 
+            ValueFromRemainingArguments=$false,
             Position=0,
             ParameterSetName='Parameter Set 1'
         )]
+        [SupportsWildcards()]
         [ValidateNotNull()]
         [ValidateNotNullOrEmpty()]
         [ValidateCount(0,5)]
