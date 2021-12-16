@@ -32,13 +32,11 @@
 
         It 'Makes a new adv function' {
             $Name = 'Get-Something'
-            Mock 'Out-File'
-            Mock 'Get-Item'
+            Mock 'Out-File' -Module 'PsModuleTemplate'
+            Mock 'Get-Item' -Module 'PsModuleTemplate'
             $null = New-AdvancedFunction -Name $Name
-            # Assert-MockCalled 'Out-File' -Times 1 -Exactly
-            # Assert-MockCalled 'Get-Item' -Times 1 -Exactly
-            Should -Invoke -CommandName Out-File -Times 1 
-            Should -Invoke -CommandName Get-Item -Times 1 
+            Should -Invoke -CommandName 'Out-File' -Times 1 -Module 'PsModuleTemplate'
+            Should -Invoke -CommandName 'Get-Item' -Times 1 -Module 'PsModuleTemplate'
 
             $script:thisName = 'New-AdvancedFunction'
         }
