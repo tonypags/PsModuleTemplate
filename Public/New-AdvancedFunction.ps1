@@ -10,7 +10,7 @@ function New-AdvancedFunction {
     [CmdletBinding()]
     [Alias('New-AdvFunction','nf')]
     param (
-        
+
         [Parameter(Position=0)]
         [ValidateNotNull()]
         $Name = 'New-Function',
@@ -47,8 +47,8 @@ function {0} {{
     The functionality that best describes this cmdlet
     #>
     [CmdletBinding(
-        DefaultParameterSetName='Parameter Set 1', 
-        SupportsShouldProcess=$true, 
+        DefaultParameterSetName='Parameter Set 1',
+        SupportsShouldProcess=$true,
         PositionalBinding=$false,
         HelpUri = 'http://www.microsoft.com/',
         ConfirmImpact='Medium'
@@ -58,11 +58,20 @@ function {0} {{
 
     param(
 
+        # Result from Some-OtherFunction
+        [Parameter(
+            ValueFromPipeline=$true,
+            Position=0
+        )]
+        [ValidateNotNullOrEmpty()]
+        [System.Object[]]
+        $InputObject,
+
         # Param1 help description
         [Parameter(
-            Mandatory=$true, 
+            Mandatory=$true,
             ValueFromPipeline=$true,
-            ValueFromPipelineByPropertyName=$true, 
+            ValueFromPipelineByPropertyName=$true,
             ValueFromRemainingArguments=$false,
             Position=0,
             ParameterSetName='Parameter Set 1'
@@ -72,7 +81,7 @@ function {0} {{
         [ValidateNotNullOrEmpty()]
         [ValidateCount(0,5)]
         [ValidateSet("sun", "moon", "earth")]
-        [Alias("p1")] 
+        [Alias("p1")]
         $Param1,
 
         # Param2 help description
