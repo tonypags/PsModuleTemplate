@@ -109,12 +109,16 @@ function {0} {{
 
     process {{
 
-        if ($pscmdlet.ShouldProcess(
-            "Target",
-            "Operation"
-        )) {{
-            # Should Process?
-        }}
+        foreach ($item in $Param1) {{
+
+            if ($pscmdlet.ShouldProcess(
+                "Target",
+                "Operation"
+            )) {{
+                # Should Process?
+            }}
+
+        }}#END: foreach ($item in $Param1) {{}}
 
     }}#END process {{}}
 
@@ -122,13 +126,18 @@ function {0} {{
 
     }}#END: end {{}}
 
-}}#END: function {0}
+}}#END: function {0} {{}}
 
 '@
 
     $Path = Join-Path $Parent "$Name.ps1"
-    $code = $rawCode -f $Name
-    $Code | Out-File $Path -Force
+    if (Test-Path $Path) {
+        Write-Warning "The existing file will be overwritten!"
+        $YN = Read-Host 'Continue and overwrite the existing file (y/N)?'
+    } else {$YN = 'y'}
+    if ($YN -eq 'y') {
+        $rawCode -f $Name | Out-File $Path -Force
+    } else {'No change made. Bye.'}
     Write-Debug "end function"
     Get-Item $Path
 
