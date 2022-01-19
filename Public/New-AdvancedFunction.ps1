@@ -48,7 +48,7 @@ function {0} {{
     #>
     [CmdletBinding(
         DefaultParameterSetName='Parameter Set 1',
-        SupportsShouldProcess=$true,
+        SupportsShouldProcess,
         PositionalBinding=$false,
         HelpUri = 'http://www.microsoft.com/',
         ConfirmImpact='Medium'
@@ -59,19 +59,16 @@ function {0} {{
     param(
 
         # Result from Some-OtherFunction
-        [Parameter(
-            ValueFromPipeline=$true,
-            Position=0
-        )]
+        [Parameter(ValueFromPipeline)]
         [ValidateNotNullOrEmpty()]
         [System.Object[]]
         $InputObject,
 
         # Param1 help description
         [Parameter(
-            Mandatory=$true,
-            ValueFromPipeline=$true,
-            ValueFromPipelineByPropertyName=$true,
+            Mandatory,
+            ValueFromPipeline,
+            ValueFromPipelineByPropertyName,
             ValueFromRemainingArguments=$false,
             Position=0,
             ParameterSetName='Parameter Set 1'
@@ -98,7 +95,7 @@ function {0} {{
         [Parameter(ParameterSetName='Another Parameter Set')]
         [ValidatePattern("[a-z]*")]
         [ValidateLength(0,15)]
-        [String]
+        [string]
         $Param3
 
     )#END: param()
