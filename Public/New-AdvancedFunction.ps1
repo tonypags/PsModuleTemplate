@@ -1,6 +1,6 @@
 function New-AdvancedFunction {
     <#
-    .Synopsis
+    .SYNOPSIS
     Creates a new file from template.
     .DESCRIPTION
     Function scaffold is based on the ISE advanced function snippet.
@@ -25,7 +25,7 @@ function New-AdvancedFunction {
 
 function {0} {{
     <#
-    .Synopsis
+    .SYNOPSIS
     Short description
     .DESCRIPTION
     Long description
@@ -33,18 +33,8 @@ function {0} {{
     Example of how to use this cmdlet
     .EXAMPLE
     Another example of how to use this cmdlet
-    .INPUTS
-    Inputs to this cmdlet (if any)
-    .OUTPUTS
-    Output from this cmdlet (if any)
     .NOTES
     General notes
-    .COMPONENT
-    The component this cmdlet belongs to
-    .ROLE
-    The role this cmdlet belongs to
-    .FUNCTIONALITY
-    The functionality that best describes this cmdlet
     #>
     [CmdletBinding(
         DefaultParameterSetName='Parameter Set 1',
