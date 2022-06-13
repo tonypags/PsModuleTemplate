@@ -7,9 +7,10 @@ Describe '<%=$PLASTER_PARAM_Name%> Tests' {
             Where-Object {$_.CommandType -eq 'Function'} |
             Select-Object -ExpandProperty Name
 
-        # dot-sourcing private functions: Required for Mocking
-        $script:privItems = Get-ChildItem $PSScriptRoot\..\Private\*.ps1
-        $script:privItems | ForEach-Object {. $_.FullName}
+        # dot-sourcing all functions: Required for Mocking
+        Get-ChildItem   $PSScriptRoot\..\Private\*.ps1,
+                        $PSScriptRoot\..\Public\*.ps1   |
+        ForEach-Object {. $_.FullName}
     }
 
     Context 'Test Module import' {
