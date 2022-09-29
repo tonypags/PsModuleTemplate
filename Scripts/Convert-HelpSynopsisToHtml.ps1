@@ -6,10 +6,10 @@ For special formatting rules, please visit https://pandoc.org/MANUAL.html
 & ./Convert-HelpSynopsisToHtml.ps1 -Path "C:\Backup-Scripts\RubrikSLAComplianceSummary.ps1"
 #>
 param($Path)
-if (Get-Command 'pandoc') {} else {
+if (Get-Command 'pandoc' -ea:ignore) {} else {
     throw 'Prerequisite not found! Please install pandoc first.'
 }
-if (Get-Command 'dos2unix') {} else {
+if (Get-Command 'dos2unix' -ea:ignore) {} else {
     throw 'Prerequisite not found! Please install dos2unix first.'
 }
 if (Test-Path $Path) {} else {
