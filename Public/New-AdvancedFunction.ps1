@@ -59,7 +59,8 @@ function {0} {{
             Mandatory,
             ValueFromPipeline,
             ValueFromPipelineByPropertyName,
-            ValueFromRemainingArguments=$false,
+            ValueFromRemainingArguments,
+            HelpMessage='',
             Position=0,
             ParameterSetName='Parameter Set 1'
         )]
