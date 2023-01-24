@@ -22,7 +22,6 @@ function New-AdvancedFunction {
     )
 
     $rawCode = @'
-
 function {0} {{
     <#
     .SYNOPSIS
@@ -115,7 +114,6 @@ function {0} {{
     }}#END: end {{}}
 
 }}#END: function {0} {{}}
-
 '@
 
     $Path = Join-Path $Parent "$Name.ps1"
@@ -124,7 +122,7 @@ function {0} {{
         $YN = Read-Host 'Continue and overwrite the existing file (y/N)?'
     } else {$YN = 'y'}
     if ($YN -eq 'y') {
-        $rawCode -f $Name | Out-File $Path -Force
+        $rawCode -f $Name | Out-File -Encoding 'UTF8' $Path -Force
     } else {'No change made. Bye.'}
     Write-Debug "end function"
     Get-Item $Path
