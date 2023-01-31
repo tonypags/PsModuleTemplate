@@ -53,6 +53,10 @@ function {0} {{
         [System.Object[]]
         $InputObject,
 
+        [Parameter()]
+        [PsCredential]
+        $Credential,
+
         # Param1 help description
         [Parameter(
             Mandatory,
