@@ -92,11 +92,17 @@ function {0} {{
         [string]
         $Param3
 
-    )#END: param()
+    )#END: param
 
     begin {{
 
-    }}#END: begin {{}}
+        # ArrayContruct - This is now the preferred syntax
+        $list = [System.Collections.Generic.List[System.Object]]@()
+        #$list.Add([PSCustomObject]@{name='value'})
+        $Strings = [System.Collections.Generic.List[String]]@()
+        #$Strings.Add('example')
+
+    }}#END: begin
 
     process {{
 
@@ -109,15 +115,18 @@ function {0} {{
                 # Should Process?
             }}
 
-        }}#END: foreach ($item in $Param1) {{}}
+            $list.Add([PSCustomObject]@{name='value'})
+            $Strings.Add('example')
 
-    }}#END process {{}}
+        }}#END: foreach ($item in $Param1)
+
+    }}#END process
 
     end {{
 
-    }}#END: end {{}}
+    }}#END: end
 
-}}#END: function {0} {{}}
+}}#END: function {0}
 '@
 
     $Path = Join-Path $Parent "$Name.ps1"
