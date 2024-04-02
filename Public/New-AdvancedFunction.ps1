@@ -98,7 +98,7 @@ function {0} {{
 
         # ArrayContruct - This is now the preferred syntax
         $list = [System.Collections.Generic.List[System.Object]]@()
-        #$list.Add([PSCustomObject]@{name='value'})
+        #$list.Add([PSCustomObject]@{{name='value'}})
         $Strings = [System.Collections.Generic.List[String]]@()
         #$Strings.Add('example')
 
@@ -115,7 +115,7 @@ function {0} {{
                 # Should Process?
             }}
 
-            $list.Add([PSCustomObject]@{name='value'})
+            $list.Add([PSCustomObject]@{{name='value'}})
             $Strings.Add('example')
 
         }}#END: foreach ($item in $Param1)
